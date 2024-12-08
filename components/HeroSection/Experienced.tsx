@@ -2,9 +2,9 @@ import React from 'react';
 import Image from 'next/image';
 import experienced from '@/public/images/experienced.png';
 import cookie from '@/public/images/Cookie.png';
-import wine from '@/public/images/wine.png';
+import wine from '@/public/images/Wine.png';
 import hamburger from '@/public/images/hamburger.png';
-import yearexperience from '@/public/images/Yearsexperienced.png'
+import yearexperience from '@/public/images/yearsexperienced.png'
 
 
 
