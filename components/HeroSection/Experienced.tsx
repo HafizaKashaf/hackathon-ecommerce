@@ -2,9 +2,9 @@ import React from 'react';
 import Image from 'next/image';
 import experienced from '@/public/images/experienced.png';
 import cookie from '@/public/images/Cookie.png';
-import wine from '@/public/images/Wine.png';
+
 import hamburger from '@/public/images/hamburger.png';
-import yearexperience from '@/public/images/yearsexperienced.png'
+
 
 
 
@@ -41,14 +41,14 @@ const Experienced = () => {
 
                     <div >
                         <button className='lg:w-[100px] lg:h-[100px] w-[64px] h-[64px] bg-[#FF9F0D]  flex justify-center items-center'>
-                            <Image src={wine} alt='hamburger'/>
+                            <Image src='/images/Wine.png' alt='hamburger' width={64} height={64}/>
                         </button>
                         <p className='text-center'>Dinner</p>
                     </div>
 
                 </div>
                 <div className='w-full'>
-                    <Image  src={yearexperience} alt='year of experience'/>
+                    <Image  src='/images/yearexperience.png' alt='year of experience' width={374} height={92}/>
 
                 </div>
 
