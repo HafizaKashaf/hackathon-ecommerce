@@ -48,7 +48,7 @@ const Experienced = () => {
 
                 </div>
                 <div className='w-full'>
-                    <Image  src='/images/yearexperience.png' alt='year of experience' width={374} height={92}/>
+                    <Image  src='/images/yearsexperienced.png' alt='year of experience' width={374} height={92}/>
 
                 </div>
 
