@@ -10,7 +10,7 @@ const Hero = () => {
   return (
     <div className='w-full  flex justify-center mt-10 lg:mt-20  '>
         <div className=' w-[80%] h-full flex max-sm:flex-col  justify-between items-center '>
-           <div className='flex flex-row'>
+           <div className='flex flex-row items-center justify-items-center '>
             {/* bodrer */}
             <div className='text-white flex flex-col items-center justify-center gap-[24px]'>
                 <Image src={line} alt='line'/>
@@ -24,7 +24,7 @@ const Hero = () => {
                 <Image src={line} alt='line'/>
             </div>
             {/* left Side */}
-            <div className='lg:pr-[64px] pl-10 py-5 flex flex-col gap-10 lg:gap-4 text-[#F7F7F7]'>
+            <div className='lg:pr-[64px] max-sm:pl-4 pl-10 py-5 flex flex-col gap-10 lg:gap-4 text-[#F7F7F7]'>
                 <div className='flex  items-center gap-[24px] text-[14px] md:text-[24px] lg:text-[32px] text-[#FF9F0D] '>
                     <span>Its Quick & Amusing!</span>
                 </div>

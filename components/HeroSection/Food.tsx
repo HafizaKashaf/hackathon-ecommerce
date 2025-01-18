@@ -25,21 +25,21 @@ const Food = () => {
            {/* products */}
            <div className='flex justify-evenly gap-[20px]   max-sm:grid max-sm:grid-col-1 md:grid-col-1 lg:grid-cols-4 '>
             {/* product1 */} 
-            <div className='w-[305px] h-[328px]  rounded border border-[#0000004D] flex justify-center items-center hover:bg-[#DB4444] hover:text-white flex-col hover:shadow-lg transition-all duration-300 cursor-pointer hover:scale-105'>
+            <div className='w-[305px] h-[328px]  rounded border border-[#0000004D] flex justify-center items-center hover:text-white flex-col hover:shadow-lg transition-all duration-300 cursor-pointer hover:scale-105'>
             <Image src={food1} alt='food1' />
            
             </div>
 
             {/* product2 */}
            
-           <div className='w-[305px] h-[328px] rounded border border-[#0000004D]  flex justify-center items-center  hover:bg-[#DB4444] hover:text-white flex-colhover:shadow-lg transition-all duration-300 cursor-pointer hover:scale-105'>
+           <div className='w-[305px] h-[328px] rounded border border-[#0000004D]  flex justify-center items-center hover:text-white flex-colhover:shadow-lg transition-all duration-300 cursor-pointer hover:scale-105'>
            <Image src={food2} alt='food2' />
             
             </div>
               
            {/* product3 */}
             
-                <div className='w-[305px] h-[328px] rounded  border border-[#0000004D] flex justify-center items-center hover:bg-[#DB4444] hover:text-white flex-col hover:shadow-lg transition-all duration-300 cursor-pointer hover:scale-105'>
+                <div className='w-[305px] h-[328px] rounded  border border-[#0000004D] flex justify-center items-centerhover:text-white flex-col hover:shadow-lg transition-all duration-300 cursor-pointer hover:scale-105'>
                 <Image src={food3} alt='food3' />
            
             </div>

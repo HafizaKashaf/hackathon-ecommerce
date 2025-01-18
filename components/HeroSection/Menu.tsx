@@ -52,15 +52,15 @@ const Menu = () => {
            </div>
            <div className='flex justify-evenly gap-[20px]   max-sm:grid max-sm:grid-col-1 md:grid-col-1 lg:grid-cols-4 '>
             {/* product1 */} 
-            <div className=' w-[376px] h-[406px]  rounded border border-[#0000004D] flex justify-center items-center hover:bg-[#DB4444] hover:text-white flex-col hover:shadow-lg transition-all duration-300 cursor-pointer hover:scale-105'>
+            <div className='max-sm:w-[320px] h-[406px]  rounded border border-[#0000004D] flex justify-center items-center'>
 
-            <Image src={menu} alt='food1'  />
+            <Image src={menu} alt='food1' width={340} className='hover:shadow-lg transition-all duration-300 cursor-pointer hover:scale-105' />
             
             </div>
 
             {/* product2 */}
            
-           <div className='w-[376px] h-[406px] rounded border border-[#0000004D] flex-col gap-5 flex justify-center items-center  cursor-pointer '>
+           <div className='max-sm:w-[320px] w-[376px]  rounded border border-[#0000004D] flex-col gap-5 flex justify-center items-center  cursor-pointer '>
             <div className='flex flex-row justify-center items-center gap-2 text-[14px] lg:text-[16px] '>
                    <Image src={menu1} alt='menu1' className='w-[80px] h-[80px]' />
                    <div className='flex flex-col gap-1'>
@@ -104,7 +104,7 @@ const Menu = () => {
               
            {/* product3 */}
             
-           <div className='w-[376px] h-[406px] rounded border border-[#0000004D] flex-col gap-5 flex justify-center items-center  cursor-pointer '>
+           <div className=' max-sm:w-[320px] w-[376px] rounded border border-[#0000004D] flex-col gap-5 flex justify-center items-center  cursor-pointer '>
             <div className='flex flex-row justify-center items-center gap-2 text-[14px] lg:text-[16px] '>
                    <Image src={menu3} alt='menu1' className='w-[80px] h-[80px]' />
                    <div className='flex flex-col gap-1'>
