@@ -7,13 +7,8 @@ import Common from "@/components/HeroSection/Common";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { allfoods } from "@/sanity/lib/queries";
 import Image from "next/image";
+import Link from "next/link";
 
-type FoodImage = {
-    asset: {
-      _id: string;  // Unique identifier for the image asset
-      url: string;  // URL of the image
-    };
-  };
   
   type Food = {
     _id: string;           // Unique identifier for the food item
@@ -39,9 +34,12 @@ type FoodImage = {
 //       <div className=' w-[80%] flex justify-center  '>
 
            <div className="grid gap-2 grid-cols-1  md:grid-cols-3 justify-center items-center my-12">
+        
             {
              foods.map((food)=>(
-                    <div className=" p-4" key={food._id}>
+              <div className="p-4" key={food._id}>
+          <Link href={`/shop/${food._id}`}>
+                      <div>
                         <Image src={food.image.asset.url}  alt={food.name} width={200} height={200} className="w-full h-full rounded object-cover "/>
                         <div className="p-2">
                         <h2 className="text-xl font-bold mt-4 mb-2">{food.name}</h2>
@@ -109,11 +107,15 @@ type FoodImage = {
 
                   
                        </div>
-                       
-
-                    </div>
+                       </div>
+                       </Link>
+                      
+                   </div>
+                   
                 ))
+                
             }
+             
            </div>
            </div>
            </div>
