@@ -2,6 +2,7 @@ import Common from "@/components/HeroSection/Common";
 import { client } from "@/sanity/lib/client";
 import Link from "next/link";
 
+
 type ItemParams = {
   params: { id: string }; // Ensure the params has 'id' from the URL
 };
@@ -18,7 +19,9 @@ async function getItems(id: string) {
       originalPrice,
       tags,
       "imageUrl": image.asset->url,
-      available
+      available,
+      rating,
+      reviews
     }`,
     { id }
   );
@@ -27,11 +30,14 @@ async function getItems(id: string) {
     throw new Error(`No item found with the id "${id}"`);
   }
 
+
   return fetchResult[0]; // Return the first item found
 }
 
 export default async function Page({ params }: ItemParams) {
   const itemsInfo = await getItems(params.id); // Fetch data using the id from URL
+  
+ 
 
   return (
     <div>
@@ -50,58 +56,9 @@ export default async function Page({ params }: ItemParams) {
 
           <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
             {/* Product Brand */}
-            <h2 className="text-sm title-font text-gray-500 tracking-widest">
-              {itemsInfo.brand || "BRAND NAME"}
-            </h2>
-            
-            {/* Product Title - Wrapped in Link to navigate */}
-            <Link href={`/shop/${itemsInfo._id}`} passHref>
-              <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">
-                {itemsInfo.name}
-              </h1>
-            </Link>
-
-            {/* Product Ratings */}
-            <div className="flex mb-4">
-              <span className="flex items-center">
-                {/* Render the rating stars dynamically */}
-                {Array(5)
-                  .fill(0)
-                  .map((_, index) => (
-                    <svg
-                      key={index}
-                      fill={index < itemsInfo.rating ? "currentColor" : "none"}
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      className="w-4 h-4 text-yellow-500"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                    </svg>
-                  ))}
-                <span className="text-gray-600 ml-3">{itemsInfo.reviews} Reviews</span>
-              </span>
-            </div>
-
-            {/* Product Description */}
-            <p className="leading-relaxed mb-16">{itemsInfo.description}</p>
-
-           
-
-            {/* Product Price and Add to Cart Button */}
-            <div className="flex ">
-              <div className="flex flex-col">
-            <div className="flex items-center space-x-2 mt-2">
-                     <span className="text-xl font-bold text-[#FF9F0D]">${itemsInfo.price}</span>
-                       {itemsInfo.originalPrice && (
-                    <span className="text-sm text-gray-500 line-through">${itemsInfo.originalPrice}</span>
-                  )}
-                  </div>
-                  <div className="mt-4">
+            <div className="mt-4">
   <span
-    className={`inline-flex items-center px-4 py-2 text-sm font-semibold  rounded-full transition-all duration-300 ease-in-out ${
+    className={`inline-flex items-center px-4 py-2 text-sm font-semibold  rounded-lg transition-all duration-300 ease-in-out ${
       itemsInfo.available
         ? 'bg-gradient-to-r from-yellow-400 via-yellow-500 to-[#FF9F0D] text-white shadow-lg'
         : 'bg-gradient-to-r from-red-400 via-red-500 to-red-600 text-white shadow-lg'
@@ -123,9 +80,58 @@ export default async function Page({ params }: ItemParams) {
         d={itemsInfo.available ? 'M5 13l4 4L19 7' : 'M6 18L18 6M6 6l12 12'}
       />
     </svg>
-    {itemsInfo.available ? 'Available' : 'Not Available'}
+    {itemsInfo.available ? 'In stock' : 'Not Available'}
   </span>
 </div>
+           
+            
+            {/* Product Title - Wrapped in Link to navigate */}
+            <Link href={`/shop/${itemsInfo._id}`} passHref>
+              <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">
+                {itemsInfo.name}
+              </h1>
+            </Link>
+
+           
+            {/* Product Description */}
+            <p className="leading-relaxed mb-16">{itemsInfo.description}</p>
+
+           
+
+            {/* Product Price and Add to Cart Button */}
+            <div className="flex ">
+              <div className="flex flex-col">
+            <div className="flex items-center space-x-2 mt-2">
+                     <span className="text-xl font-bold text-[#FF9F0D]">${itemsInfo.price}</span>
+                       {itemsInfo.originalPrice && (
+                    <span className="text-sm text-gray-500 line-through">${itemsInfo.originalPrice}</span>
+                  )}
+                  </div>
+                   {/* Product Ratings */}
+            <div className="flex mb-4">
+              <span className="flex items-center">
+                {/* Render the rating stars dynamically */}
+                {Array(5)
+                  .fill(0)
+                  .map((_, index) => (
+                    <svg
+                      key={index}
+                      fill={index < itemsInfo.rating ? "currentColor" : "none"}
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      className="w-4 h-4 text-yellow-500"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                  ))}
+                <span className="text-gray-600 ml-3">  {itemsInfo.reviews || 0} Reviews Reviews</span>
+              </span>
+            </div>
+
+                 
 </div>
 
               <button className="flex ml-auto h-[100%] text-white bg-yellow-500 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-600 rounded">
