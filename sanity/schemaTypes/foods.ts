@@ -9,6 +9,15 @@ export default {
         title: 'Food Name',
       },
       {
+        name:'slug',
+        type : 'slug',
+        title : 'Slug',
+        options:{
+          source:'name'
+        }
+
+      },
+      {
         name: 'category',
         type: 'string',
         title: 'Category',
