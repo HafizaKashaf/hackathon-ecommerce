@@ -7,6 +7,7 @@ import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 import { Food } from "@/types/products";
 import { groq } from "next-sanity";
+import Image from "next/image";
 import Link from "next/link";
 
 
@@ -54,10 +55,12 @@ interface FoodPageProps{
         <div className="container px-5 py-24 mx-auto">
           <div className="lg:w-4/5 mx-auto flex flex-wrap">
             {/* Product Image */}
-            <img
+            <Image
               alt={food.name}
               className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded"
               src={urlFor(food.image).url()} 
+              width={100}
+              height={100}
             />
   
             <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">

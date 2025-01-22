@@ -16,7 +16,7 @@ const Footer = () => {
             <div className="w-full flex pr-2   max-sm:gap-3 justify-between max-sm:flex-col max-sm:w-[310px] max-sm:h-[261px] border-b border-[#FF9F0D] pb-5 lg:pb-10">
                   <div className="w-[380px] max-sm:w-[310px] max-sm:h-[91px] flex flex-col gap-3 ">
                      <p className="text-[18px] lg:text-[32px] lg:leading-[40px] leading-[27px] font-semibold lg:font-bold max-sm:text-center">Still You Need Our Support ?</p>
-                     <p className="text-[16px] leading-[24px] max-sm:text-center">Don't wait make a smart & logical quote here. Its pretty easy.</p>
+                     <p className="text-[16px] leading-[24px] max-sm:text-center">Don&apos;t wait make a smart & logical quote here. Its pretty easy.</p>
                   </div>
                   <div className=" w-[380px] flex flex-col gap-[16px] max-sm:w-[310px] max-sm:h-[146px]">
                       <div className='flex max-sm:w-[310px] w-[400px]   max-sm:flex-col  max-sm:h-[112px]'>
@@ -62,21 +62,21 @@ const Footer = () => {
             <div className=" flex flex-col gap-[16px]">
                 <p className="text-[16px]  lg:text-[24px] leading-[24px] font-semibold">Resent Post</p>
                 <div className='flex flex-row gap-2 text-[14px] lg:text-[16px] '>
-                   <img src="/images/post1.png" alt='post1' />
+                   <Image src="/images/post1.png" alt='post1' width={80} height={80} />
                    <div className='flex flex-col gap-1 '>
                       <p>20 Feb 2022</p>
                       <p>Keep Your Business </p>
                    </div>
                 </div>
                 <div className='flex flex-row gap-2 text-[14px] lg:text-[16px] '>
-                   <img src="/images/post2.png" alt='post2' />
+                   <Image src="/images/post2.png" alt='post2' width={80} height={80} />
                    <div className='flex flex-col gap-1'>
                       <p>20 Feb 2022</p>
                       <p>Keep Your Business </p>
                    </div>
                 </div>
                 <div className='flex flex-row gap-2 text-[14px] lg:text-[16px] '>
-                   <img src="/images/post3.png" alt='post3' />
+                   <Image src="/images/post3.png" alt='post3' width={80} height={80} />
                    <div className='flex flex-col gap-1'>
                       <p>20 Feb 2022</p>
                       <p>Keep Your Business </p>

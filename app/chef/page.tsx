@@ -29,7 +29,7 @@ type Chef = {
         <div>
              <Common title='Our Chef' subtitle='Chef' />
              <div className='w-full flex justify-center  pb-10 bg-white '>
-//       <div className=' w-[80%] flex justify-center  '>
+     <div className=' w-[80%] flex justify-center  '>
 
            <div className="grid gap-2 grid-cols-1  md:grid-cols-3 justify-center items-center my-12">
             {
