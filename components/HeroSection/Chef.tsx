@@ -5,12 +5,11 @@
 // import card3 from '@/public/images/card3.png';
 // import card4 from '@/public/images/card4.png';
 
-"use client";
-
-import { useEffect, useState } from "react";
+"use client"
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { fourchefs } from "@/sanity/lib/queries";
 import Image from "next/image";
+import { useState, useEffect } from "react";
 
 type Chef = {
   _id: string;
@@ -19,52 +18,80 @@ type Chef = {
   image: { asset: { _id: string; url: string } };
 };
 
-const ChefSection = () => {
+export default function ChefSection() {
   const [chefs, setChefs] = useState<Chef[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchChefs = async () => {
-      const data: Chef[] = await sanityFetch({ query: fourchefs });
-      setChefs(data);
+      try {
+        const data: Chef[] = await sanityFetch({ query: fourchefs });
+        setChefs(data);
+      } catch (err) {
+        setError("Failed to load chefs. Please try again later.");
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
     };
-
     fetchChefs();
   }, []);
 
+  if (loading) {
+    return (
+      <div className="w-full flex justify-center items-center py-10">
+        <p className="text-white">Loading chefs...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="w-full flex justify-center items-center py-10">
+        <p className="text-red-500">{error}</p>
+      </div>
+    );
+  }
+
   return (
-    <div className="w-full flex justify-center py-10">
-      <div className="w-[90%] flex flex-col justify-center items-center">
-        <h1 className="text-[#FF9F0D]">Chef</h1>
-        <div className="flex justify-between items-center mt-5">
-          <h2 className="font-semibold text-[20px] md:text-[36px] md:leading-[48px] text-white">
-            <span className="text-[#FF9F0D]">Me</span>et Our Chef
+    <div>
+      <div className="w-full flex justify-center py-10">
+        <div className="w-[90%] flex flex-col justify-center items-center">
+          {/* Header Section */}
+          <h1 className="text-[#FF9F0D] text-2xl uppercase tracking-wider">Chef</h1>
+          <h2 className="font-semibold text-[20px] md:text-[36px] md:leading-[48px] text-white mt-2">
+            Meet Our <span className="text-[#FF9F0D]">Chefs</span>
           </h2>
-        </div>
-        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-between items-center my-12">
-          {chefs.map((chef) => (
-            <div className="p-6 relative group" key={chef._id}>
-              <div className="relative w-full h-64 overflow-hidden rounded-lg">
-                <Image
-                  src={chef.image.asset.url}
-                  alt={chef.name}
-                  width={300}
-                  height={300}
-                  className="w-full h-full object-cover rounded-lg transition-transform duration-300 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <h2 className="text-xl font-bold text-yellow-400">{chef.name}</h2>
-                  <p className="text-sm text-white">{chef.position}</p>
+
+          {/* Chef Grid */}
+          <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 my-12">
+            {chefs.map((chef) => (
+              <div
+                className="p-6 relative group rounded-lg shadow-lg transition-shadow hover:shadow-xl"
+                key={chef._id}
+              >
+                <div className="relative w-full h-64 overflow-hidden rounded-lg">
+                  <Image
+                    src={chef.image.asset.url}
+                    alt={`${chef.name}'s image`}
+                    width={300}
+                    height={300}
+                    className="w-full h-full object-cover rounded-lg transition-transform duration-300 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <h2 className="text-xl font-bold text-yellow-400">{chef.name}</h2>
+                    <p className="text-sm text-white">{chef.position}</p>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </div>
   );
-};
-
-export default ChefSection;
+}
 
 // const Chef = () => {
 //   return (
