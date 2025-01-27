@@ -23,22 +23,24 @@ type Chef = {
 
   export default async function Page() {
      const chefs : Chef[] = await sanityFetch({query: allchefs})
+     const chefsSec : Chef[] = await sanityFetch({query: allchefs})
+
 
      return(
        
         <div>
              <Common title='Our Chef' subtitle='Chef' />
              <div className='w-full flex justify-center  pb-10 bg-white '>
-     <div className=' w-[80%] flex justify-center  '>
+     <div className=' w-[80%] flex justify-center   '>
 
-           <div className="grid gap-2 grid-cols-1  md:grid-cols-3 justify-center items-center my-12">
+           <div className="grid gap-2 grid-cols-1 md:grid-cols-4 justify-center items-center my-12">
             {
              chefs.map((chef)=>(
                     <div className=" p-4" key={chef._id}>
-                        <Image src={chef.image.asset.url}  alt={chef.name} width={200} height={200} className="w-full h-[80%] object-cover"/>
+                        <Image src={chef.image.asset.url}  alt={chef.name} width={200} height={200} className="w-full  object-cover"/>
                         <div className="p-2">
-                        <h2 className="text-xl font-bold mt-4 mb-2">{chef.name}</h2>
-                        <div className="flex flex-col gap-2 ">
+                        <h2 className="text-xl font-bold mt-4 mb-2 text-yellow-800">{chef.name}</h2>
+                        <div className="flex flex-col gap-2 border-b ">
                         <p className="text-sm">
                         <strong className="font-semibold">Position:</strong> {chef.position}
                          </p>
@@ -48,7 +50,34 @@ type Chef = {
                         <p className="text-sm">
                         <strong className="font-semibold">Specialty:</strong> {chef.specialty}
                         </p>
-                       <p className="text-sm">
+                       <p className="text-sm pb-2">
+                       <strong className="font-semibold">Description:</strong> {chef.description}
+                       </p>
+                       </div>
+                       </div>
+                       
+
+                    </div>
+                ))
+            }
+          
+            {
+             chefsSec.map((chef)=>(
+                    <div className=" p-4" key={chef._id}>
+                        <Image src={chef.image.asset.url}  alt={chef.name} width={200} height={200} className="w-full h-[80%] object-cover"/>
+                        <div className="p-2">
+                        <h2 className="text-xl font-bold mt-4 mb-2">{chef.name}</h2>
+                        <div className="flex flex-col gap-2 border-b ">
+                        <p className="text-sm">
+                        <strong className="font-semibold">Position:</strong> {chef.position}
+                         </p>
+                        <p className="text-sm">
+                         <strong className="font-semibold">Experience:</strong> {chef.experience} years
+                        </p>
+                        <p className="text-sm">
+                        <strong className="font-semibold">Specialty:</strong> {chef.specialty}
+                        </p>
+                       <p className="text-sm pb-2">
                        <strong className="font-semibold">Description:</strong> {chef.description}
                        </p>
                        </div>

@@ -2,6 +2,7 @@
 // import { client } from "@/sanity/lib/client";
 // import Link from "next/link";
 
+import { addToCart } from "@/app/actions/actions";
 import Common from "@/components/HeroSection/Common";
 import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
@@ -9,6 +10,8 @@ import { Food } from "@/types/products";
 import { groq } from "next-sanity";
 import Image from "next/image";
 import Link from "next/link";
+import AddToCartButton from "@/components/AddToCartButton";
+
 
 
 interface FoodPageProps{
@@ -43,7 +46,11 @@ interface FoodPageProps{
 
  export default async function FoodPage({params}:FoodPageProps){
      const {slug} = await params
-     const food =await getProduct(slug)
+     const food =await getProduct(slug);
+    
+  
+     
+     
 
 
      return (
@@ -128,9 +135,9 @@ interface FoodPageProps{
                    
   </div>
   
-                <button className="flex ml-auto h-[100%] text-white bg-yellow-500 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-600 rounded">
-                  Add to Cart
-                </button>
+      {/* Add to Cart Button */}
+      <AddToCartButton food={food} />
+
                 <button className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
                   <svg
                     fill="currentColor"

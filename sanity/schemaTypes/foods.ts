@@ -1,3 +1,5 @@
+import { title } from "process";
+
 export default {
     name: 'food',
     type: 'document',
@@ -18,11 +20,24 @@ export default {
 
       },
       {
-        name: 'category',
-        type: 'string',
-        title: 'Category',
-        description:
-          'Category of the food item (e.g., Burger, Sandwich, Drink, etc.)',
+          name:'inventory',
+          title: 'inventory',
+          type :'number'
+      },
+      {
+        name: 'categories',
+        type: 'array',
+        title: 'Categories',
+        description: 'Select categories for the food item (e.g., Burger, Sandwich, Drink)',
+        of: [
+          {
+            type: 'reference',
+            to: [{ type: 'category' }],
+          },
+        ],
+        options: {
+          layout: 'tags', // Checkboxes will appear for categories
+        },
       },
       {
         name: 'price',

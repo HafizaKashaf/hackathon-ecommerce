@@ -15,8 +15,15 @@ export interface Food {
     slug :{
         _type : "slug";
         current :string
-    }
+    };
+    inventory : number;
+    categories: Category[]; 
+    
 }
-
+export interface Category {
+    _id: string;
+    name: string;
+    foods: Food[];
+  }
 
 
