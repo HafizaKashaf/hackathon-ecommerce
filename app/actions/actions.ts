@@ -37,9 +37,5 @@ export const updateCartQuantity = (productId: string , quantity:number) => {
 export const getCartItems = () : Food[] => {
     return JSON.parse(localStorage.getItem('cart') || '[]')
 }
-const getCartCount = (): number => {
-    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-    return cart.length;
-  };
 
 

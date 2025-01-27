@@ -2,7 +2,6 @@
 // import { client } from "@/sanity/lib/client";
 // import Link from "next/link";
 
-import { addToCart } from "@/app/actions/actions";
 import Common from "@/components/HeroSection/Common";
 import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
