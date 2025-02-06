@@ -103,7 +103,7 @@ const Header = () => {
               </Link>
 
               {/* Cart Icon with Count */}
-              <Link href="/cart">
+            <Link href="/login">
                 <div className='relative'>
                   <PiHandbag className='w-[24px] h-[24px] text-white' />
                   {cartCount > 0 && (
