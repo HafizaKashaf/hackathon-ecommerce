@@ -80,10 +80,64 @@ const FOODS = () => {
 
   return (
     <div>
-      <div className="w-full flex justify-center pb-10 bg-white">
+      <div className="w-full flex  justify-center pb-10 bg-white">
         <div className="w-[80%] flex max-sm:flex-col md:justify-between">
+
           {/* Product Grid */}
-          <div className="grid gap-2 grid-cols-1 md:grid-cols-3 justify-center items-center my-12  w-full md:w-[80%]">
+           
+  {/*  */}
+  {/* Mobile View: Horizontal Scroll Navbar */}
+  <div className=" flex gap-2 overflow-x-auto md:hidden whitespace-nowrap py-2 px-2 bg-gray-100 rounded-md">
+    {categories.map((category) => (
+      <button
+        key={category}
+        className={`px-4 py-2 rounded-full text-sm ${
+          selectedCategory === category
+            ? "bg-orange-500 text-white"
+            : "bg-white text-gray-800 border border-gray-300"
+        }`}
+        onClick={() => setSelectedCategory(category)}
+      >
+        {category}
+      </button>
+    ))}
+  </div>
+  {/*  */}
+  <div className="md:hidden h-[54px] border-[1.5px] border-[#FF9F0D] my-12 rounded flex justify-between pl-3 items-center gap-5">
+              <input
+                type="text"
+                placeholder="Search by name or tag..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="bg-gray-100 outline-none rounded placeholder:text-[16px] w-[130px] h-[24px]"
+              />
+              <button className="w-[54px] h-[54px] bg-yellow-500 flex items-center justify-center">
+                <CiSearch className="w-[24px] h-[24px] text-white" />
+              </button>
+            </div>
+            {/*  */}
+            <div className=" md:hidden px-2 mt-2">
+  <h2 className="font-bold mb-4">Price Range</h2>
+  <div className="flex items-center gap-4">
+    <span>{priceRanges[0]}</span>
+    <input
+      type="range"
+      min={0}
+      max={priceRanges.length - 1}
+      step={1}
+      value={priceRanges.indexOf(selectedPriceRange)}
+      className="slider w-full"
+      onChange={(e) => setSelectedPriceRange(priceRanges[Number(e.target.value)])}
+    />
+    <span>{priceRanges[priceRanges.length - 1]}</span>
+  </div>
+  <p className="mt-2 text-sm">
+    Selected Range: <strong>{selectedPriceRange}</strong>
+  </p>
+</div>
+{/*  */}
+
+          <div className="grid gap-2 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center items-center my-12  w-full md:w-[80%]">
             {filteredFood.map((food) => (
               <div className="p-4" key={food._id}>
                 <Link href={`/shop/${food.slug.current}`}>
@@ -163,9 +217,9 @@ const FOODS = () => {
           </div>
 
           {/* Sidebar: Category, Price Range, and Search Bar */}
-          <div className="w-[200px]  md:bg-gray-100 md:py-12 ">
+          <div className="w-full md:w-[200px]  md:bg-gray-100 md:py-12 ">
             {/* Search bar */}
-            <div className="h-[54px] border-[1.5px] border-[#FF9F0D] my-12 rounded flex justify-between pl-3 items-center gap-5">
+            <div className=" max-sm:hidden h-[54px] border-[1.5px] border-[#FF9F0D] my-12 rounded flex justify-between pl-3 items-center gap-5">
               <input
                 type="text"
                 placeholder="Search by name or tag..."
@@ -180,29 +234,33 @@ const FOODS = () => {
 
             {/* Category Filter */}
             <div className="px-2">
-              <h2 className="font-bold mb-4">Categories</h2>
-              <div className="flex flex-col gap-2">
-                {categories.map((category) => (
-                  <button
-                    key={category}
-                    className={`px-4 py-2 rounded-full text-left ${
-                      selectedCategory === category
-                        ? "bg-orange-500 text-white"
-                        : "hover:bg-gray-200"
-                    }`}
-                    onClick={() => setSelectedCategory(category)}
-                  >
-                    {category}
-                  </button>
-                ))}
-              </div>
-            </div>
+  <h2 className="font-bold mb-4 hidden md:block">Categories</h2>
+  
+ 
+  {/* Desktop View: Sidebar */}
+  <div className="hidden md:flex flex-col gap-2">
+    {categories.map((category) => (
+      <button
+        key={category}
+        className={`px-4 py-2 rounded-full text-left ${
+          selectedCategory === category
+            ? "bg-orange-500 text-white"
+            : "hover:bg-gray-200"
+        }`}
+        onClick={() => setSelectedCategory(category)}
+      >
+        {category}
+      </button>
+    ))}
+  </div>
+</div>
+
             {/* banner */}
             <Image
             src="/images/banner.png" alt="image" width={200} height={300}/>
 
              {/* price range */}
-           <div className="px-2 mt-6">
+           <div className="max-sm:hidden px-2 mt-6">
   <h2 className="font-bold mb-4">Price Range</h2>
   <div className="flex items-center gap-4">
     <span>{priceRanges[0]}</span>

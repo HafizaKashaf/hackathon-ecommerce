@@ -16,22 +16,24 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 
+// Function to get cart count from localStorage
 const getCartCount = (): number => {
   if (typeof window !== 'undefined') {
     const cart = JSON.parse(localStorage.getItem('cart') || '[]');
     return cart.length;
   }
-  return 0; 
+  return 0;
 };
 
 const Header = () => {
-  const [cartCount, setCartCount] = useState<number>(getCartCount);
+  const [cartCount, setCartCount] = useState<number | null>(null); // Initial state is null to avoid mismatch
 
-  // Set cart count on mount
+  // Set cart count after initial render
   useEffect(() => {
-    // Update cart count when local storage changes
+    setCartCount(getCartCount()); // Get cart count from localStorage
+
     const handleStorageChange = () => {
-      setCartCount(getCartCount());
+      setCartCount(getCartCount()); // Update cart count if localStorage changes
     };
 
     // Listen for changes to localStorage
@@ -41,7 +43,12 @@ const Header = () => {
     return () => {
       window.removeEventListener('storage', handleStorageChange);
     };
-  }, []);
+  }, []); // Empty dependency array ensures this runs only once on mount
+
+  // Render the component once the cartCount is available (to prevent hydration issues)
+  if (cartCount === null) {
+    return null; // Optionally, show a loading spinner or skeleton until cartCount is fetched
+  }
 
   return (
     <div className='w-full flex items-center justify-center mt-10'>
@@ -56,7 +63,7 @@ const Header = () => {
           {/* Nav Links */}
           <ul className='md:flex max-sm:hidden text-white items-center space-x-3 xl:space-x-10'>
             <li className='navlink'>
-              <Link href="#">Home</Link>
+              <Link href="/">Home</Link>
             </li>
             <li className='navlink'>
               <Link href="/menu">Menu</Link>

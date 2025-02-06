@@ -8,7 +8,7 @@ const MobileNav = () => {
         <ul className="flex flex-col items-center justify-center gap-4">
     
         <li className='navlink'>
-                <Link href="#">Home</Link>
+                <Link href="/">Home</Link>
             </li>
             <li className='navlink'>
                 <Link href="/menu">Menu</Link>

@@ -7,21 +7,24 @@ import Food from '@/components/HeroSection/Food';
 import News from '@/components/HeroSection/News';
 import Add from '@/components/HeroSection/Add';
 import Testimonial from '@/components/HeroSection/Testimonial';
-import Chef from '@/components/HeroSection/Chef';
+import ChefSection from '@/components/HeroSection/Chef';
 import Menu from '@/components/HeroSection/Menu';
 import Service from '@/components/HeroSection/Service';
 import Experienced from '@/components/HeroSection/Experienced';
 
+
 const page = () => {
-  return (
+ 
+  return  (
     <div>
+      
       {/* <Header /> */}
       <Hero />
       <About />
       <Food />
       <Service />
       <Menu />
-      <Chef />
+      <ChefSection />
       <Experienced />
       <Testimonial />
       <Add />

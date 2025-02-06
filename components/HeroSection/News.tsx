@@ -16,10 +16,10 @@ const News = () => {
          <div className=''>
          <div className='flex flex-col justify-center items-center' >
             {/* today */}
-            <h1 className='text-[#FF9F0D]' > Food Category</h1>
+            <h1 className='text-[#FF9F0D]' >Blog Post</h1>
             {/* flashsales line */}
             <div className='flex justify-between items-center mt-5'>
-            <h2 className='font-semibold text-[20px] md:text-[36px] md:leading-[48px] '><span className='text-[#FF9F0D]'>Ch</span>oose Food Iteam</h2>
+            <h2 className='font-semibold text-[20px] md:text-[36px] md:leading-[48px] '><span className='text-[#FF9F0D]'>La</span>test News & Blog</h2>
             
            
             </div>
@@ -29,7 +29,7 @@ const News = () => {
            <div className='flex justify-between gap-[20px]   max-sm:grid max-sm:grid-col-1 md:grid-col-2 lg:grid-cols-3 '>
             {/* product1 */} 
             <div className='  rounded border  flex justify-center items-center flex-col hover:shadow-lg transition-all duration-300 cursor-pointer hover:scale-105'>
-            <Image src={burger} alt='food1' />
+            <Image src={burger} alt='food1'  />
             <div className='w-[338px] flex flex-col gap-4 py-3 px-3
                 '>
                     <p className='text-[#FF9F0D]'>10 February 2022</p>

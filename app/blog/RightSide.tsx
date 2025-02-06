@@ -85,7 +85,7 @@ const Rightside = () => {
     ];
 
     return (
-        <div className='max-w-full md:max-w-[424px] px-4 md:px-8 my-12'>
+        <div className='max-w-full md:max-w-[424px] px-4  my-12 mr-4'>
 
             {/* Search bar */}
             <button className='flex w-full border-gray-300 border-[1px] rounded-[2px]'>

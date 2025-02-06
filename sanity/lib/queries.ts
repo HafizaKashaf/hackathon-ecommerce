@@ -50,7 +50,39 @@ export const allchefs = defineQuery(`
              }
            }
          `;
-         
+         export const fourposts = `*[_type == "post"]{
+          _id,
+          title,
+          slug,
+          publishedAt,
+          image{
+            asset->{
+              url
+            },
+            alt
+          },
+          body[]{
+            ...,
+            children[]{
+              text
+            }
+          }
+        }`;
+        
+        
+        
+
+        export const singlePostQuery = `*[_type == "post" && _id == $_id][0] {
+          _id,
+          title,
+          slug,
+          publishedAt,
+          body,
+          "imageUrl": image.asset->url
+        }`;
+        
+        
+        
 
 
 

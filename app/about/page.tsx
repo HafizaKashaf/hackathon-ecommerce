@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Link from 'next/link';
 import bgpages from '@/public/images/bgpages.png';
@@ -282,6 +283,8 @@ const page = () => {
         </div>
       
     </div>
+    {/*  */}
+    
     {/* sixth menu */}
     <div className='w-full   flex justify-center items-center mt-10 lg-mt-20 '>
         <div className='w-[80%] flex flex-col gap-[40px] justify-center items-center text-black'>
