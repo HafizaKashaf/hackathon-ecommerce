@@ -238,6 +238,7 @@ const CheckoutPage = () => {
                 onChange={handleInputChange}
                 className="w-full p-2 mb-2 border rounded outline-none"
               />
+              {formErrors.firstName && <span className="text-red-500 text-sm">First Name is required</span>}
               <input
                 type="text"
                 placeholder="Company"

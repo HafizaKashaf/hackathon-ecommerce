@@ -85,11 +85,11 @@ const Rightside = () => {
     ];
 
     return (
-<<<<<<< HEAD
+
         <div className='max-w-full md:max-w-[424px] px-4  my-12 mr-4'>
-=======
+
         <div className='max-w-full md:max-w-[424px] px-4 mr-4 my-12'>
->>>>>>> cffb135089cf3d75dc4395088c7bc12c7efc397f
+
 
             {/* Search bar */}
             <button className='flex w-full border-gray-300 border-[1px] rounded-[2px]'>
@@ -174,7 +174,7 @@ const Rightside = () => {
                     <FaFacebookF size={30} className='bg-[#C4C4C4] p-2 rounded-full' />
                 </div>
             </div>
-
+</div>
         </div>
     );
 };

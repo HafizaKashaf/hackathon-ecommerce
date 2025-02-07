@@ -5,8 +5,15 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 
+// Define types for post body content
+interface PostBodyBlock {
+  _type: string;
+  children?: { text: string }[];
+  asset?: { url: string };
+}
+
 // Define the Post type
-type Post = {
+interface Post {
   _id: string;
   title: string;
   slug: string;
@@ -17,8 +24,8 @@ type Post = {
     };
     alt?: string;
   };
-  body: any[];
-};
+  body: PostBodyBlock[];
+}
 
 export default function Leftside() {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -62,9 +69,9 @@ export default function Leftside() {
         // Create a preview text with truncation
         const bodyPreview = post.body && Array.isArray(post.body)
           ? post.body
-              .map((block: any) => {
+              .map((block: PostBodyBlock) => {
                 if (block._type === "block" && block.children) {
-                  return block.children.map((child: any) => child.text).join(" ");
+                  return block.children.map((child) => child.text).join(" ");
                 }
                 return "";
               })
@@ -113,8 +120,6 @@ export default function Leftside() {
           </div>
         );
       })}
-
-      
     </div>
   );
 }

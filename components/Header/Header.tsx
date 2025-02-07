@@ -98,7 +98,7 @@ const Header = () => {
               </button>
             </div>
             <div className='flex gap-2 items-center justify-center'>
-              <Link href="/signUp">
+              <Link href="/login">
                 <PiUser className='w-[24px] h-[24px] text-white' />
               </Link>
 

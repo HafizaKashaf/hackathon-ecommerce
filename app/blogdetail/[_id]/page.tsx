@@ -2,6 +2,21 @@ import Common from "@/components/HeroSection/Common";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { singlePostQuery } from "@/sanity/lib/queries";
 import Image from "next/image";
+import CommentsSection from "@/components/CommentSection";
+
+// Define the structure of the post and its body elements based on Sanity schema
+interface PostBodyBlock {
+  _type: string;
+  children?: { text: string }[];
+  asset?: { url: string };
+}
+
+interface Post {
+  title: string;
+  imageUrl?: string;
+  publishedAt: string;
+  body: PostBodyBlock[];
+}
 
 interface BlogDetailProps {
   params: { _id: string }; // ✅ Fixed params (removed Promise)
@@ -9,10 +24,10 @@ interface BlogDetailProps {
 
 export default async function BlogDetail({ params }: BlogDetailProps) {
   // Ensure params are awaited before using
-  const { _id } =  params;
+  const { _id } = params;
 
   // Fetch the post
-  const post = await sanityFetch({
+  const post: Post | null = await sanityFetch({
     query: singlePostQuery,
     params: { _id },
   });
@@ -56,17 +71,17 @@ export default async function BlogDetail({ params }: BlogDetailProps) {
         {/* ✅ Blog Content */}
         <div className="text-lg text-gray-800 leading-relaxed mt-6">
           {post.body && Array.isArray(post.body)
-            ? post.body.map((block: any, index: number) =>
+            ? post.body.map((block: PostBodyBlock, index: number) =>
                 block._type === "block" && block.children ? (
-                  block.children.map((child: any, childIndex: number) => (
+                  block.children.map((child, childIndex) => (
                     <p key={`${index}-${childIndex}`} className="mb-4">
                       {child.text}
                     </p>
                   ))
-                ) : block._type === "image" ? (
+                ) : block._type === "image" && block.asset ? (
                   <div key={index} className="my-6 w-full h-[300px] relative">
                     <Image
-                      src={block.asset?.url}
+                      src={block.asset.url}
                       alt={post.title}
                       width={800}
                       height={400}
@@ -77,6 +92,7 @@ export default async function BlogDetail({ params }: BlogDetailProps) {
               )
             : "No content available"}
         </div>
+        <CommentsSection/>
       </div>
     </div>
   );
