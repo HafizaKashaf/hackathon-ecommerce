@@ -54,7 +54,7 @@ const page = () => {
       <section className="text-white body-font">
         <div className="container mx-auto flex px-5 py-24">
           {/* left image */}
-          <div className="flex flex-col md:flex-row items-center md:space-x-4 mt-2 ml-2">
+          <div className=" max-sm:hidden flex flex-col md:flex-row items-center md:space-x-4 mt-2 ml-2">
             <Image
               className="object-cover object-center w-[336px] h-[536px] mt-[530]px ml-300px radius-6px"
               alt="hero"
@@ -62,7 +62,7 @@ const page = () => {
             />
           </div>
           {/* Right Images */}
-          <div className="flex flex-col space-y-2 space-x-2 mt-2 ml-2">
+          <div className=" max-sm:hidden flex flex-col space-y-2 space-x-2 mt-2 ml-2">
             <Image
               className="object-cover object-center w-[309px] h-[271px] mt-584px ml-660px radius-6px"
               alt="image2"
