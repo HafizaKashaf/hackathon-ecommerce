@@ -3,6 +3,7 @@ import { sanityFetch } from "@/sanity/lib/fetch";
 import { singlePostQuery } from "@/sanity/lib/queries";
 import Image from "next/image";
 import CommentsSection from "@/components/CommentSection";
+import { notFound } from "next/navigation";
 
 // Define the structure of the post and its body elements based on Sanity schema
 interface PostBodyBlock {
@@ -12,21 +13,17 @@ interface PostBodyBlock {
 }
 
 interface Post {
+  _id: string;
   title: string;
   imageUrl?: string;
   publishedAt: string;
   body: PostBodyBlock[];
 }
 
-interface BlogDetailProps {
-  params: { _id: string }; // ✅ Fixed params (removed Promise)
-}
-
-export default async function BlogDetail({ params }: BlogDetailProps) {
-  // Ensure params are awaited before using
+export default async function BlogDetail({ params }: { params: { _id: string } }) {
   const { _id } = params;
 
-  // Fetch the post
+  // ✅ Fetch the post
   const post: Post | null = await sanityFetch({
     query: singlePostQuery,
     params: { _id },
@@ -36,13 +33,7 @@ export default async function BlogDetail({ params }: BlogDetailProps) {
 
   // Handle post not found
   if (!post) {
-    return (
-      <div className="flex justify-center items-center min-h-screen text-center bg-white">
-        <div className="bg-red-100 text-red-600 px-6 py-4 rounded-md shadow-md">
-          <p className="text-xl font-semibold">⚠️ Post Not Found</p>
-        </div>
-      </div>
-    );
+    notFound(); // ✅ Proper Next.js 404 handling
   }
 
   return (
@@ -70,30 +61,51 @@ export default async function BlogDetail({ params }: BlogDetailProps) {
 
         {/* ✅ Blog Content */}
         <div className="text-lg text-gray-800 leading-relaxed mt-6">
-          {post.body && Array.isArray(post.body)
-            ? post.body.map((block: PostBodyBlock, index: number) =>
-                block._type === "block" && block.children ? (
-                  block.children.map((child, childIndex) => (
-                    <p key={`${index}-${childIndex}`} className="mb-4">
-                      {child.text}
-                    </p>
-                  ))
-                ) : block._type === "image" && block.asset ? (
-                  <div key={index} className="my-6 w-full h-[300px] relative">
-                    <Image
-                      src={block.asset.url}
-                      alt={post.title}
-                      width={800}
-                      height={400}
-                      className="rounded-lg object-cover"
-                    />
-                  </div>
-                ) : null
-              )
-            : "No content available"}
+          {post.body?.map((block, index) =>
+            block._type === "block" && block.children ? (
+              block.children.map((child, childIndex) => (
+                <p key={`${index}-${childIndex}`} className="mb-4">
+                  {child.text}
+                </p>
+              ))
+            ) : block._type === "image" && block.asset ? (
+              <div key={index} className="my-6 w-full h-[300px] relative">
+                <Image
+                  src={block.asset.url}
+                  alt={post.title}
+                  width={800}
+                  height={400}
+                  className="rounded-lg object-cover"
+                />
+              </div>
+            ) : null
+          )}
         </div>
-        <CommentsSection/>
+
+        {/* ✅ Comments Section */}
+        <CommentsSection />
       </div>
     </div>
   );
+}
+
+// ✅ Ensure that Next.js knows the valid `_id` values
+export async function generateStaticParams() {
+  try {
+    // Fetch a list of post IDs
+    const posts: { _id: string }[] = await sanityFetch({
+      query: `*[_type == "post"]{_id}`,
+      params: {},
+    });
+
+    if (!posts || posts.length === 0) {
+      console.warn("⚠️ No posts found for static generation.");
+      return [];
+    }
+
+    return posts.map((post) => ({ _id: post._id }));
+  } catch (error) {
+    console.error("❌ Error fetching static params:", error);
+    return [];
+  }
 }
