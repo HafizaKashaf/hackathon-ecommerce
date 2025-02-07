@@ -112,11 +112,11 @@ export default function Leftside() {
             </div>
 
             {/* Read More Button */}
-
-              <button className="w-[172px] h-[52px] text-[#FF9F0D] border-[#FF9F0D] border-[2px] rounded-sm my-8 px-8"> */}
+         
+              <button className="w-[172px] h-[52px] text-[#FF9F0D] border-[#FF9F0D] border-[2px] rounded-sm my-8 px-8">
                 Read More
               </button>
-        
+            
           </div>
         );
       })}
