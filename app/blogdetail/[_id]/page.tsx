@@ -5,7 +5,7 @@ import Image from "next/image";
 import CommentsSection from "@/components/CommentSection";
 import { notFound } from "next/navigation";
 
-// Define the structure of the post and its body elements based on Sanity schema
+// ✅ Define the post structure based on Sanity schema
 interface PostBodyBlock {
   _type: string;
   children?: { text: string }[];
@@ -20,7 +20,15 @@ interface Post {
   body: PostBodyBlock[];
 }
 
-export default async function BlogDetail({ params }: { params: { _id: string } }) {
+// ✅ Define the expected type for params
+interface BlogDetailProps {
+  params: {
+    _id: string;
+  };
+}
+
+// ✅ Fix TypeScript issue & ensure params are correctly inferred
+export default async function BlogDetail({ params }: BlogDetailProps) {
   const { _id } = params;
 
   // ✅ Fetch the post
@@ -31,9 +39,9 @@ export default async function BlogDetail({ params }: { params: { _id: string } }
 
   console.log("Fetched Post Data:", post); // ✅ Debugging
 
-  // Handle post not found
+  // ✅ Handle post not found
   if (!post) {
-    notFound(); // ✅ Proper Next.js 404 handling
+    notFound();
   }
 
   return (
@@ -92,7 +100,7 @@ export default async function BlogDetail({ params }: { params: { _id: string } }
 // ✅ Ensure that Next.js knows the valid `_id` values
 export async function generateStaticParams() {
   try {
-    // Fetch a list of post IDs
+    // ✅ Fetch post IDs from Sanity
     const posts: { _id: string }[] = await sanityFetch({
       query: `*[_type == "post"]{_id}`,
       params: {},
